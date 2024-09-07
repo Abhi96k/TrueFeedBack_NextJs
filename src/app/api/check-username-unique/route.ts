@@ -11,6 +11,7 @@ export async function GET(request: Request) {
   await dbConnect();
 
   try {
+    // localhost:3000/api/check-username-unique?username=Abhishek
     const { searchParams } = new URL(request.url);
 
     const queryParams = {
