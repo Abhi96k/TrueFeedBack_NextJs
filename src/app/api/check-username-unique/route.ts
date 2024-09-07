@@ -8,12 +8,22 @@ const UsernameQuerySchema = z.object({
 });
 
 export async function GET(request: Request) {
+  // if (request.method !== "GET") {
+  //   return Response.json(
+  //     {
+  //       success: false,
+  //       message: "Invalid request method",
+  //     },
+  //     { status: 405 }
+  //   );
+  // }
+
   await dbConnect();
 
   try {
     // localhost:3000/api/check-username-unique?username=Abhishek
     const { searchParams } = new URL(request.url);
-
+    // Compare this snippet from feedback/src/app/api/check-username-unique/route.ts:
     const queryParams = {
       username: searchParams.get("username"),
     };
@@ -21,7 +31,6 @@ export async function GET(request: Request) {
     const result = UsernameQuerySchema.safeParse(queryParams);
 
     if (!result.success) {
-
       const usernameErrors = result.error.format().username?._errors || [];
       return Response.json(
         {
@@ -37,6 +46,7 @@ export async function GET(request: Request) {
     }
 
     const { username } = result.data;
+    //username is unique if no verified user exists with the same username
 
     const existingVerifiedUser = await UserModel.findOne({
       username,
@@ -60,8 +70,7 @@ export async function GET(request: Request) {
       },
       { status: 200 }
     );
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Error checking username:", error);
     return Response.json(
       {

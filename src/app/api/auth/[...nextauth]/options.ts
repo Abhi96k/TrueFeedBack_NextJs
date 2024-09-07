@@ -47,6 +47,9 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
+
+        // Store user data in the token
+        
         token._id = user._id?.toString(); // Convert ObjectId to string
         token.isVerified = user.isVerified;
         token.isAcceptingMessages = user.isAcceptingMessages;
@@ -55,6 +58,9 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
+
+      //store token data in the session
+
       if (token) {
         session.user._id = token._id;
         session.user.isVerified = token.isVerified;
