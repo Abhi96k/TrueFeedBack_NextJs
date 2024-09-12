@@ -9,13 +9,16 @@ import { useDebounce } from "@uidotdev/usehooks";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+}
+
+from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "../../../hooks/use-toast";
 import axios, { AxiosError } from "axios";
@@ -147,7 +150,7 @@ export default function SignUpForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <Input {...field} name="email" />
-                  <p className="text-muted text-gray-400 text-sm text-black">
+                  <p className="text-muted text-gray-400 text-sm text-black ">
                     We will send you a verification code
                   </p>
                   <FormMessage />
