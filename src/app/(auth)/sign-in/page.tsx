@@ -139,6 +139,7 @@ export default function SignInForm() {
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
+
     defaultValues: {
       identifier: "",
       password: "",
@@ -148,7 +149,6 @@ export default function SignInForm() {
   const { toast } = useToast();
 
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
-
     const result = await signIn("credentials", {
       redirect: false,
       identifier: data.identifier,
@@ -156,31 +156,24 @@ export default function SignInForm() {
     });
 
     if (result?.error) {
-
       if (result.error === "CredentialsSignin") {
-
         toast({
           title: "Login Failed",
           description: "Incorrect username or password",
           variant: "destructive",
         });
-        
-
-      } 
-      else {
+      } else {
         toast({
           title: "Error",
           description: result.error,
           variant: "destructive",
         });
-
       }
     }
 
     if (result?.url) {
       router.replace("/dashboard");
     }
-
   };
 
   return (
@@ -193,7 +186,9 @@ export default function SignInForm() {
           <p className="mb-4">Sign in to continue your secret conversations</p>
         </div>
         <Form {...form}>
+          
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
             <FormField
               name="identifier"
               control={form.control}
@@ -205,6 +200,7 @@ export default function SignInForm() {
                 </FormItem>
               )}
             />
+
             <FormField
               name="password"
               control={form.control}
@@ -222,6 +218,7 @@ export default function SignInForm() {
             </Button>
 
           </form>
+
         </Form>
         <div className="text-center mt-4">
           <p>
@@ -231,8 +228,6 @@ export default function SignInForm() {
             </Link>
           </p>
         </div>
-
-
       </div>
     </div>
   );
