@@ -146,7 +146,9 @@ export default function SignInForm() {
   });
 
   const { toast } = useToast();
+
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+
     const result = await signIn("credentials", {
       redirect: false,
       identifier: data.identifier,
@@ -154,24 +156,31 @@ export default function SignInForm() {
     });
 
     if (result?.error) {
+
       if (result.error === "CredentialsSignin") {
+
         toast({
           title: "Login Failed",
           description: "Incorrect username or password",
           variant: "destructive",
         });
-      } else {
+        
+
+      } 
+      else {
         toast({
           title: "Error",
           description: result.error,
           variant: "destructive",
         });
+
       }
     }
 
     if (result?.url) {
       router.replace("/dashboard");
     }
+
   };
 
   return (
@@ -207,9 +216,11 @@ export default function SignInForm() {
                 </FormItem>
               )}
             />
+
             <Button className="w-full" type="submit">
               Sign In
             </Button>
+
           </form>
         </Form>
         <div className="text-center mt-4">
@@ -220,6 +231,8 @@ export default function SignInForm() {
             </Link>
           </p>
         </div>
+
+
       </div>
     </div>
   );
