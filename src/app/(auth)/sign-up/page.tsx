@@ -16,9 +16,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-}
-
-from "@/components/ui/form";
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "../../../hooks/use-toast";
 import axios, { AxiosError } from "axios";
@@ -150,9 +148,10 @@ export default function SignUpForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <Input {...field} name="email" />
-                  <p className="text-muted text-gray-400 text-sm text-black ">
+                  <p className="text-muted text-black text-sm">
                     We will send you a verification code
                   </p>
+
                   <FormMessage />
                 </FormItem>
               )}
